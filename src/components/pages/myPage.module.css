@@ -1,0 +1,16 @@
+@value makerShadow, makerWhite from '../../common/colors.css';
+
+.title{
+    text-align: center;
+    margin: 20px;
+    margin-top: 60px;
+    
+}
+
+.likeContainer{
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}

@@ -1,0 +1,38 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# font
+# yarn add @fortawesome/fontawesome-svg-core
+# yarn add @fortawesome/free-solid-svg-icons
+# yarn add @fortawesome/react-fontawesome
+# npm install --save @fortawesome/free-brands-svg-icons
+# npm install --save @fortawesome/free-regular-svg-icons
+
+# - slick
+# yarn add react-slick --save
+# yarn add slick-carousel --save
+
+# - redux
+# npm install redux react-redux redux-promise redux-thunk --save

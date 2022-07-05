@@ -1,0 +1,46 @@
+{
+  "codyImg": [
+    {
+      "type": "캐주얼",
+      "gender": "여성",
+      "ages": "20대",
+      "image": " (1).jpg"
+    },
+    {
+      "type": "캐주얼",
+      "gender": "여성",
+      "ages": "20대",
+      "image": " (2).jpg"
+    },
+    {
+      "type": "캐주얼",
+      "gender": "여성",
+      "ages": "20대",
+      "image": " (3).jpg"
+    },
+    {
+      "type": "캐주얼",
+      "gender": "여성",
+      "ages": "20대",
+      "image": " (4).jpg"
+    },
+    {
+      "type": "캐주얼",
+      "gender": "여성",
+      "ages": "20대",
+      "image": " (5).jpg"
+    },
+    {
+      "type": "캐주얼",
+      "gender": "여성",
+      "ages": "20대",
+      "image": " (6).jpg"
+    },
+    {
+      "type": "캐주얼",
+      "gender": "여성",
+      "ages": "20대",
+      "image": " (7).jpg"
+    }
+  ]
+}
