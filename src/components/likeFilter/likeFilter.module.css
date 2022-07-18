@@ -1,0 +1,31 @@
+@value makerShadow, makerLightGray, makerBlue,makerWhite from '../../common/colors.css';
+
+.filterContainer{
+  width: 70%;
+  margin: auto;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: makerLightGray;
+  /* border: 1px solid skyblue; */
+}
+.clothes, .style{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.clotheItem, .styleItem{
+  padding: 4px 10px;
+  margin: 4px;
+  background-color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1px solid skyblue;
+}
+
+.clotheItem:hover, .styleItem:hover{
+  box-sizing: border-box;
+  background-color: skyblue;
+  border: 1px solid skyblue;
+}
