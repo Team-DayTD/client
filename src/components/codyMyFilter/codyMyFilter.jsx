@@ -8,6 +8,10 @@ const CodyMyFilter = ()=>{
     const [style, setStyles] = useState("캐주얼");
     const [ages, setAges] = useState("20");
     const [loc, setLoc] = useState("서대문구");
+    const [isOpen, setToggle] = useState(false); 
+    const toggleBtn = () => {
+        setToggle(isOpen => !isOpen); // on,off 개념 boolean
+      }
     
     return (
         <div className={styles.filterContainer}>
@@ -17,9 +21,9 @@ const CodyMyFilter = ()=>{
                 <li className={styles.clotheItem}>#{ages}대</li>
                 <li className={styles.clotheItem}>#{loc}</li>
             </ul>
-            <FontAwesomeIcon className={styles.option} icon={faChevronDown} />
+            <FontAwesomeIcon className={`${styles.option}  ${isOpen ? styles.option : styles.turn }`} onClick={()=>toggleBtn()} icon={faChevronDown} />
             </div>
-            <div className={styles.Hidefilter}>
+            <div className={`${styles.Hidefilter} ${isOpen ? styles.showFilterBox : styles.hideFilterBox}`}>
             <ul className={styles.clothes}>
                 <li className={styles.clotheItem}>#외투</li>
                 <li className={styles.clotheItem}>#상의</li>
