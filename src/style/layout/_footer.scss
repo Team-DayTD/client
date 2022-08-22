@@ -1,0 +1,19 @@
+.footer{
+    width: 100%;
+    height: 140px;
+    margin-top: 30px;
+    background-color: $main;
+    .discription{
+        width: 70%;
+        max-width: $maxWidth;
+        margin: auto;
+        padding: 30px 20px;
+        color: $white;
+        font-size: $fontMicro;
+        max-width: $maxWidth;
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+    }
+}
+
