@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Weather from '../components/Main/weather';
 import RecoCody from '../components/Main/RecoCody';
-import axios from 'axios'
+import axios from 'axios';
 
 const MainPage = ()=>{
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [GPS, setGPS] = useState();
-  const [lat, setLat] = useState(33.0);
-  const [lon, setLon] = useState(126.0);
+  const [lat, setLat] = useState(60.0);
+  const [lon, setLon] = useState(127.0);
+  const [loc, setLoc] = useState({
+    si: "",
+    gu: "",
+    dong: "",
+  });
   
   const fetchGPS = async()=>{
     try{
       setLoading(true);
-      const url = 'http://127.0.0.1:8000/our_weather/'
+      const url = 'http://localhost:8000/our_weather/'
       const response = await axios.get(url, {params:{ lat:lat ,lon:lon}},
       {withCredentials:true});
       setGPS(response.data);
@@ -21,6 +26,8 @@ const MainPage = ()=>{
       setError(e);
       console.log(e);
     }
+    mapApi();
+    // getAddr(lat, lon);
     setLoading(false);
   }
 
@@ -42,6 +49,29 @@ const MainPage = ()=>{
     }
   }
 
+const mapApi = async () => {
+  console.log(lat, lon);
+  try {
+    let response = await axios
+      .get(
+        `https://dapi.kakao.com/v2/local/geo/coord2address.json?input_coord=WGS84&x=${lon}&y=${lat}`,
+        {
+          headers: {
+            Authorization: 'KakaoAK 93045994f59d7d87d000bb0656c55117',  
+          },
+        },
+      )
+      .then(response => {
+        const location = response.data.documents[0];
+        setLoc({si: location.address.region_1depth_name,
+          gu: location.address.region_2depth_name,
+          dong: location.address.region_3depth_name});
+      });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
   useEffect(()=>{
     setError(false);
     setLoading(true);
@@ -52,7 +82,7 @@ const MainPage = ()=>{
   
   return (
     <div>
-      <Weather GPS={GPS} loading={loading}/>
+      <Weather GPS={GPS} loading={loading} loc={loc}/>
       <RecoCody/>
     </div>
   );

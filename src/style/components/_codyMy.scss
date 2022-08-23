@@ -19,4 +19,22 @@
       object-fit: cover;
     }
   }
+      
+  .btnBox{
+    width: 90%;
+    display: flex;
+    justify-content: end;
+    text-align: center;
+    .nextBtn{
+      width: 100px;
+      height: 40px;
+      color: $white;
+      background-color: $main;
+      font-weight: $weightBold;
+      font-size: $fontMicro;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+  }
 } 
