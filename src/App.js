@@ -5,6 +5,7 @@ import Like from './Pages/Like';
 import MyPage from './Pages/MyPage';
 import SignUp from './Pages/SignUp';
 import "./style/main.scss";
+import { useEffect } from 'react';
 
 function App() {
   return (

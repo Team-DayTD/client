@@ -42,6 +42,7 @@ const SignIn = memo((props) => {
     users.forEach((user)=>{
       if(user.user_id===id && user.password ===password){
         sessionStorage.setItem("loginId", id);
+        alert(`${JSON.stringify(sessionStorage.loginId)}님 로그인 성공`)
         navigate('/');
         close();
       }
@@ -62,9 +63,6 @@ const SignIn = memo((props) => {
     {props.isModal?(
     <div className='modal'>
       <section id="login" className='loginContainer'>
-        <span className='close' onClick={close}>
-          &times;
-        </span>
         <h1 className='logo'>DayTD</h1>
         
         <form type="text" id="idForm" className='formBox'>

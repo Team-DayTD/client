@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../components/shared/popup';
 import axios from 'axios';
@@ -8,11 +8,12 @@ const SignUp = () => {
   const [popup, setPopup] = useState({open: false, title: "", message: "", callback: false});
 
   const [id, setUserId] = useState("");
+  const [idCheck, setUserIdCheck] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordConfirm, setConfirmPassword] = useState("");
   const [gender, setGender] = useState("M");
   const [email, setEmail] = useState("");
-
+  const [users, setUsers] = useState("");
   const [idError, setUserIdError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [passwordConfirmError, setConfirmPasswordError] = useState(false);
@@ -84,15 +85,44 @@ const SignUp = () => {
     if(!password) setPasswordError(true);
     if(!passwordConfirm) setConfirmPasswordError(true);
 
-    if(id && password && passwordConfirm && gender && email && birth.year && birth.month && birth.day ) return true;
+    if(id && idCheck && password && passwordConfirm && gender && email && birth.year && birth.month && birth.day ) return true;
     else return false;
+  }
+
+  const idCheckHandler = () => {
+    setUserIdCheck(true);
+    console.log(id,idError);
+    if(idError||!id){
+      alert("아이디를 제대로 입력해 주세요.");
+      setUserIdCheck(false);
+      return
+    }
+    users.forEach((user)=>{
+    if((user.user_id===id))
+        setUserIdCheck(false);
+    })
+    console.log(idCheck)
+    if(idCheck)
+      alert("사용하실 수 있는 아이디입니다.");
+    else
+      alert("이미 존재하는 아이디입니다.");
+  };
+
+  const fetchUser = async()=>{
+    try{
+      const url = 'http://127.0.0.1:8000/account/api/user/'
+      const response = await axios.get(url,{withCredentials:true});
+      setUsers(response.data);
+    } catch(e){
+      console.log(e);
+    }
   }
 
   const onSubmit = (e) => {
     const birthFormat = `${birth.year}-${birth.month}-${birth.day}`;
     console.log(id, email, password, gender, birthFormat);
     if(!validation()){
-      alert('빈칸을 채워주세요');
+      alert('중복 확인 및 빈칸을 채워주세요');
     }
     else{
     const url = 'http://127.0.0.1:8000/account/api/register/'
@@ -109,7 +139,7 @@ const SignUp = () => {
     console.log(response);
     if(response.status == 201){
       alert('회원가입 성공!')
-      navigate('/');
+      navigate('/Main');
       } else {
       let message = response.data.message;
       alert(message);
@@ -119,6 +149,11 @@ const SignUp = () => {
       });
     }
   }
+
+  useEffect(()=>{
+    fetchUser();
+  },[])
+
 
   return (
     <div className='backContainer'>
@@ -130,6 +165,7 @@ const SignUp = () => {
           <label className='subTitle' for='id'>아이디 <span className='star'>*</span></label><br/>
           <input type="text" name="id" id="id" maxlength="20" value={id}
             placeholder="ID" className='input' onChange={onChangeUserId}/>
+          <button type='button' className='idCheckBtn' onClick={idCheckHandler}>중복 확인</button>
           <div className={`noti ${idError?'active':'none'}`}>최소 5자 이상, 영어와 숫자만 포함해주세요.</div>
         </form>
         <form id="signUpEmail" className='signUpBox'>

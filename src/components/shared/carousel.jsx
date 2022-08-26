@@ -18,14 +18,13 @@ function Carousel ({ sliders }) {
       <div className='carouselContainer'>
 				<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 				<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
-        <h3 className='ageText'>{dummy.codyImg[0].ages}들이 많이 입는 코디 추천!</h3>
+        <h3 className='ageText'>많이 입는 {dummy.codyImg[0].type} 코디 추천!</h3>
         <Slider {...settings}>
           {dummy.codyImg.map((cody) =>(
             <div className='codyBox'>
               <div className='imgBox'>
                 <img className='codyImg' src={`${process.env.PUBLIC_URL}/images/clothes/${cody.image}`} alt="" />
               </div>
-              <h3 className='codyType'>{cody.type}</h3>
             </div>
           ))}
         </Slider>

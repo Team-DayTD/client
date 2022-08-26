@@ -10,12 +10,12 @@
     justify-content: space-between;
     align-items: center;
   }
-  .filter, .clothes, .style{
+  .filter, .clothes, .style, .loc{
     flex-wrap: wrap;
     display: flex;
     width: 100%;
   }
-  .clotheItem, .styleItem{
+  .clotheItem, .styleItem, .select{
     padding: 4px 10px;
     margin: 4px;
     background-color: $white;
@@ -23,6 +23,7 @@
     cursor: pointer;
     border: 1px solid $mainLight1;
   }
+
   .active{
     cursor:default;
   }

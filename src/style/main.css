@@ -370,6 +370,23 @@ textarea {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.codyMy .btnBox {
+  width: 90%;
+  display: flex;
+  justify-content: end;
+  text-align: center;
+}
+.codyMy .btnBox .nextBtn {
+  width: 100px;
+  height: 40px;
+  color: white;
+  background-color: #175A97;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
 
 .filterContainer {
   width: 100%;
@@ -384,12 +401,12 @@ textarea {
   justify-content: space-between;
   align-items: center;
 }
-.filterContainer .filter, .filterContainer .clothes, .filterContainer .style {
+.filterContainer .filter, .filterContainer .clothes, .filterContainer .style, .filterContainer .loc {
   flex-wrap: wrap;
   display: flex;
   width: 100%;
 }
-.filterContainer .clotheItem, .filterContainer .styleItem {
+.filterContainer .clotheItem, .filterContainer .styleItem, .filterContainer .select {
   padding: 4px 10px;
   margin: 4px;
   background-color: white;

@@ -7,7 +7,7 @@ import SignIn from '../../Pages/SignIn';
 const Navbar = memo(() => {
   const navigate = useNavigate();
   const sessionStorage = window.sessionStorage;
-  const [isSIModal, SetIsSIModal] = useState(false);
+  const [isSIModal, SetIsSIModal] = useState(JSON.stringify(sessionStorage.loginId)?false:true);
   const [session, SetSession] = useState(false);
 
   const handleSignInModal = () => {
@@ -16,39 +16,37 @@ const Navbar = memo(() => {
 
   const handleLogOut = ()=>{
       sessionStorage.removeItem("loginId");
+      navigate('/');
+      SetIsSIModal(true);
       SetSession(!session);
   }
 
-  const notLogin = ()=>{
+  const isLogin = ()=>{
     if(!JSON.stringify(sessionStorage.loginId)){
-      navigate('/Main');
+      navigate('/');
       SetIsSIModal(true);
     }
   }
 
-  useEffect(()=>{
-    notLogin();
-  },[])
-
   return (
     <div className='navContainer'>
       <nav className='nav'>
-        <Link to="/Main" onClick={notLogin}>
+        <Link to={`/Main`} onClick={isLogin}>
           <h1 className='logo'>DayTD</h1>
         </Link>
         <ul className='menu'>
-          <Link to="/Main" onClick={notLogin}>
+          <Link to="/Main" onClick={isLogin}>
             <li className='item'><FontAwesomeIcon icon={faHouse}/></li>
           </Link>
-          <Link to="/Like" onClick={notLogin}>
+          <Link to="/Like" onClick={isLogin}>
             <li className='item'><FontAwesomeIcon icon={faHeart}/></li>
           </Link>
           {JSON.stringify(sessionStorage.loginId)?
-          <Link to="/MyPage" onClick={notLogin}>
+          <Link to="/MyPage" onClick={isLogin}>
             <li className='item'><FontAwesomeIcon icon={faUser}/></li>
           </Link>
           :<li className='item' onClick={handleSignInModal}>
-            <FontAwesomeIcon icon={faUser} onClick={notLogin}/>
+            <FontAwesomeIcon icon={faUser} onClick={isLogin}/>
           </li>}
           {JSON.stringify(sessionStorage.loginId)?
           <li className='item' onClick={handleLogOut}> 

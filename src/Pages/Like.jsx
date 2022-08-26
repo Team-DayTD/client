@@ -2,8 +2,20 @@ import { faShuttleSpace } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import dummy from "../data/data.json";
 import LikeFilter from '../components/Like/likeFilter';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Like = () => {
+  const navigate = useNavigate();
+  const isLogin = ()=>{
+    if(!JSON.stringify(sessionStorage.loginId)){
+      navigate('/');
+    }
+  }
+
+  useEffect(()=>{
+    isLogin();
+  })
   return (
     <div className='like'>
       <h2 className='title'>❤️좋아요❤️</h2>
