@@ -4,6 +4,10 @@
   flex-direction: column;
   justify-content: center;
   margin: auto;
+  max-width: $maxWidth;
+  @media (max-width: $mediaWidth) {
+    width: 95%;
+  }
   .title{
     text-align: center;
     margin: 20px;

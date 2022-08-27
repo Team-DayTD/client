@@ -1,87 +1,97 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import location from "../../data/location.json";
 import axios from 'axios';
 import { useEffect } from 'react';
-const CodyMyFilter = (props)=>{
-  const [style, setStyles] = useState("캐주얼");
-  const [ages, setAges] = useState("20");
+const CodyMyFilter = memo((props)=>{
+  const [style, setStyle] = useState("전체");
   const [loc, setLoc] = useState({
     si:'서울특별시',
     gu:'전체',
     dong:'전체'
   });
-  const [clothe, setClothes] = useState("전체");
+  const [locSave, setLocSave] = useState();
+  const [styleSave, setStyleSave] = useState();
+  const [error, setError] = useState(false);
   const [isOpen, setToggle] = useState(false); 
+  const id = JSON.stringify(sessionStorage.loginId).replace(/\"/gi, "");
+  const styleList = ["전체", "캐주얼","러블리","심플베이직","섹시글램","유니크","빈티지","기타"]
+  const styleDic = {"전체":"all",
+    "캐주얼":"casual","러블리":"lovely","심플베이직":"simple&basic",
+    "섹시글램":"sexy","유니크":"unique","빈티지":"vintage","기타":"ect"}
 
-  const styleList = ["캐주얼","러블리","심플베이직","섹시글램","유니크","빈티지","유니섹스","기타"]
-  const clotheList = ["전체","외투","상의","하의","한벌의상"];
   const toggleBtn = () => {
     setToggle(isOpen => !isOpen); // on,off 개념 boolean
   }
-  const changeStyle = (s)=>{
-    setStyles(s);
-  };
-  const changeAges = (age)=>{
-    setAges(age);
-  };
-  const changeClothes = (clothe)=>{
-    setClothes(clothe);
-  };
-  const changeLoc = (l)=>{
-    setLoc(l);
-  };
+
+  const fetchLocSave = async()=>{
+    try{
+      const url = 'http://127.0.0.1:8000/clothes/api/my_location/post/'
+      const header = {"Content-type":"application/json"}
+      const data= {
+        user_id: id,
+        si:loc.si,
+        dong: loc.dong,
+        gu: loc.gu,
+      }
+      const response = await axios.post(url, data, header,{ withCredentials: true })
+      setLocSave(response);
+    } catch(e){
+      setError(e);
+      console.log(e);
+    }
+  }
+
+  const fetchStyleSave = async()=>{
+    try{
+      const url = 'http://127.0.0.1:8000/clothes/api/my_style/post/'
+      const header = {"Content-type":"application/json"}
+      const data= {
+        user_id: id,
+        user_style: styleDic[style]
+      }
+      const response = await axios.post(url, data, header,{ withCredentials: true })
+      setStyleSave(response);
+    } catch(e){
+      setError(e);
+      console.log(e);
+    }
+  }
 
   const onSave = (e) => {
-    const id = JSON.stringify(sessionStorage.loginId).replace(/\"/gi, "");
-    const url = 'http://127.0.0.1:8000/clothes/api/my_location/post/'
-    const header = {"Content-type":"application/json"}
-    const data= {
-      user_id: id,
-      si:loc.si,
-      dong: loc.dong,
-      gu: loc.gu,
-    }
-    axios.post(url, data, header,{ withCredentials: true })
-    .then(function (response) {
-    console.log(response);
-    if(response.status == 201){
+    fetchLocSave();
+    fetchStyleSave();
+    console.log(locSave, styleSave)
+    if(locSave.status == 201){
       alert('저장 성공!')
+      props.fetchCody()
       } else {
-      let message = response.data.message;
+      let message = locSave.data.message;
       alert(message);
       }
-      }).catch(function (error) {
-        console.log(error);
-      });
     
   }
   useEffect(()=>{
-    setLoc({si:props.opt[0].si, 
-      gu:props.opt[0].gu, 
-      dong:props.opt[0].dong})
-  },[props.opt])
+    setLoc({si:props.locOpt.si, 
+      gu:props.locOpt.gu, 
+      dong:props.locOpt.dong});
+    setStyle(props.styleOpt);
+  },[props.locOpt])
 
   return (
     <div className='filterContainer'>
         <div className='showFilter'>
         <ul className='filter'>
             <li className='clotheItem active'>#{style}룩</li>
-            <li className='clotheItem active'>#{clothe}</li>
-            <li className='clotheItem active'>#{ages}대</li>
-            <li className='clotheItem active'>#{`${loc.si} ${loc.gu} ${loc.dong}`}</li>
+            <li className='clotheItem active locActive'>#{`${loc.si} ${loc.gu} ${loc.dong}`}</li>
         </ul>
         <FontAwesomeIcon className={`option ${isOpen ?'option':'turn'}`} onClick={()=>toggleBtn()} icon={faChevronDown} />
         </div>
         <div className={`Hidefilter ${isOpen ?'showFilterBox':'hideFilterBox'}`}>
-        <ul className='clothes'>
-          {clotheList.map(c=>
-          (<li onClick={()=>changeClothes(c)} className='clotheItem'>#{c}</li>))}
-        </ul>
         <ul className='style'>
           {styleList.map(s=>
-          (<li onClick={()=>changeStyle(s)} className='styleItem'>#{s}</li>))}
+          (<li onClick={()=>setStyle(s)} className='styleItem'>#{s}</li>))}
         </ul>
         <div className='loc'>
         <select id='location' className='select'
@@ -93,7 +103,6 @@ const CodyMyFilter = (props)=>{
           ))}
         </select>
         <select id='location' className='select'
-          
           value={loc.gu} onChange={e =>setLoc({...loc, gu:e.target.value})}>
           {Object.keys(location[loc.si]).map(gu => (
             <option value={gu} key={gu}>
@@ -110,10 +119,10 @@ const CodyMyFilter = (props)=>{
           ))}
         </select>
         </div>
-        <button onClick={onSave}>저장</button>
+        <button className={`saveBtn ${isOpen ?'showSaveBtn':'hideSaveBtn'}`} onClick={onSave}>저장</button>
         </div>
     </div>
   );
-};
+});
 
 export default CodyMyFilter;

@@ -6,6 +6,7 @@ import MyPage from './Pages/MyPage';
 import SignUp from './Pages/SignUp';
 import "./style/main.scss";
 import { useEffect } from 'react';
+import Footer from './components/layout/footer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/MyPage" element={<MyPage/>}></Route>
           <Route path="/SignUp" element={<SignUp/>}></Route>
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </div>
   );

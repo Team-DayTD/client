@@ -1,5 +1,5 @@
 
-.container{
+.recoContainer{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -9,14 +9,20 @@
     justify-content: space-around;
     align-items:center;
   width: 70%;
-  min-width: 40em;
+  max-width: $maxWidth;
   height: 3em;
   padding-bottom: 5px;
   background-color: makerWhite;
+  @media (max-width: $mediaWidth) {
+    width: 95%;
+  }
 }
 
 .content_container{
   position:relative;
   width: 70%;
+  @media (max-width: $mediaWidth) {
+    width: 95%;
+  }
 }
 }

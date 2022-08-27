@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 const LikeFilter = () => {
-  const [style, setStyles] = useState("캐주얼");
+  const [style, setStyles] = useState("전체");
   const [clothe, setClothes] = useState("전체");
-  const styleList = ["캐주얼","러블리","심플베이직","섹시글램","유니크","빈티지","유니섹스","기타"]
-  const clotheList = ["전체","외투","상의","하의","한벌의상"];
+  const styleList = ["전체", "캐주얼","러블리","심플베이직","섹시글램","유니크","빈티지","유니섹스","기타"]
+  const clotheList = ["전체","외투","상하의","한벌의상"];
 
   const changeStyle = (s)=>{
       setStyles(s);

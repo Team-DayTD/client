@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick"; 
 import dummy from "../../data/data.json";
 
-function Carousel ({ sliders }) {
+function Carousel (props,{ sliders }) {
   const settings = {
     dots: false,
     infinite: true,
@@ -18,7 +18,7 @@ function Carousel ({ sliders }) {
       <div className='carouselContainer'>
 				<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 				<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
-        <h3 className='ageText'>많이 입는 {dummy.codyImg[0].type} 코디 추천!</h3>
+        <h3 className='title'><span className='color'>{props.title1}</span>{props.title2}{props.title3}</h3>
         <Slider {...settings}>
           {dummy.codyImg.map((cody) =>(
             <div className='codyBox'>

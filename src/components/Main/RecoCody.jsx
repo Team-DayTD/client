@@ -18,7 +18,7 @@ const RecoCody = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='recoContainer'>
       <div className='btnContainer'>
         <CateBtn content='Best!' nav='best' btnSetting={btnSetting}/>
         <CateBtn content='내 코디1' nav='cody1' btnSetting={btnSetting}/>

@@ -11,6 +11,7 @@
   .weatherContainer{
     margin: auto;
     color: $white;
+    max-width: $maxWidth;
     text-align: start;
     .todayTxt{
       font-size: 1em;

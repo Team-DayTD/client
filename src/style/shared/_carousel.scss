@@ -2,16 +2,25 @@
   position: relative;
   margin: 0 auto;
   padding: 0.5em 0.5em;
-  width: 70%;
-  min-width: 40em;
+  width: 100%;
+  max-width: $maxWidth;
   background-color: $white;
+
+  .title{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    .color{
+      color: $main;
+      font-size: $fontSmall;
+    }
+  }
   .codyBox{
-    margin: 1em;
-    box-shadow: 0px 0px 6px 0px $shadow;
     .imgBox{
+      box-shadow: 0px 0px 6px 0px $shadow;
       position: relative;
       width: 95%;
       padding-bottom: 100%;
+      margin: auto;
       overflow: hidden;
       .codyImg {
           position:absolute;
@@ -19,9 +28,6 @@
           height: 100%;
           object-fit: cover;
       }
-    }
-    .codyType{
-      font-size: 0.8em;
     }
   }
 }

@@ -90,22 +90,21 @@ const SignUp = () => {
   }
 
   const idCheckHandler = () => {
-    setUserIdCheck(true);
-    console.log(id,idError);
+    let check = true;
     if(idError||!id){
       alert("아이디를 제대로 입력해 주세요.");
       setUserIdCheck(false);
       return
     }
     users.forEach((user)=>{
-    if((user.user_id===id))
-        setUserIdCheck(false);
+      if(user.user_id===id)
+        check=false;
     })
-    console.log(idCheck)
-    if(idCheck)
+    if(check)
       alert("사용하실 수 있는 아이디입니다.");
     else
       alert("이미 존재하는 아이디입니다.");
+    setUserIdCheck(check);
   };
 
   const fetchUser = async()=>{
@@ -165,7 +164,7 @@ const SignUp = () => {
           <label className='subTitle' for='id'>아이디 <span className='star'>*</span></label><br/>
           <input type="text" name="id" id="id" maxlength="20" value={id}
             placeholder="ID" className='input' onChange={onChangeUserId}/>
-          <button type='button' className='idCheckBtn' onClick={idCheckHandler}>중복 확인</button>
+          <button type='button' className={`idCheckBtn ${idCheck?'idCheck':'idCheckBtn'}`} onClick={()=>idCheck?null:idCheckHandler()}>중복 확인</button>
           <div className={`noti ${idError?'active':'none'}`}>최소 5자 이상, 영어와 숫자만 포함해주세요.</div>
         </form>
         <form id="signUpEmail" className='signUpBox'>

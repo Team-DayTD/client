@@ -1,4 +1,5 @@
 .filterContainer{
+  position: relative;
   width: 100%;
   margin: auto;
   padding: 10px;
@@ -22,8 +23,13 @@
     border-radius: 20px;
     cursor: pointer;
     border: 1px solid $mainLight1;
+    font-size: $fontMicro;
   }
-
+  .select{
+    border: 1px solid $green;
+    border-radius: 4px;
+  }
+  
   .active{
     cursor:default;
   }
@@ -44,7 +50,7 @@
   }
   .showFilterBox{
     visibility: visible;  
-    height: 130px;
+    height: 120px;
   }
   .hideFilterBox{
     visibility: hidden;
@@ -53,6 +59,21 @@
   }
   .turn{
     transform: rotate(180deg);
+  }
+  .saveBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    background-color: $mainLight1;
+    color: $white;
+    width: 50px;
+    height: 30px;
+    font-weight: $weightBold;
+    font-size: $fontMicro;
+    border-radius: 20px;
+  }
+  .hideSaveBtn{
+    opacity: 0;
   }
 }
 

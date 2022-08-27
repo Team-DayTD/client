@@ -6,12 +6,9 @@
 @import 'base/color';
 @import 'base/typography';
 
-@import 'components/carousel';
 @import 'components/codyMy';
 @import 'components/codyMyFilter';
 @import 'components/likeFilter';
-@import 'components/slick-theme';
-@import 'components/slick';
 @import 'components/weather';
 
 @import 'layout/footer';
@@ -23,6 +20,7 @@
 @import 'pages/signIn';
 @import 'pages/signUp';
 
+@import 'shared/carousel';
 @import 'shared/cateBtn';
 
 

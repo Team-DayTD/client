@@ -10,11 +10,15 @@
     display: flex;
     flex-direction: column;
     width: 70%;
+    max-width: $maxWidth;
     padding: 10px 20px;
     margin: 50px 0 30px 0;
     background-color: $white;
     border-radius: 20px;
     box-shadow: 0px 0px 6px 0px $shadow;
+    @media (max-width: $mediaWidth) {
+      width: 100%;
+    }
     .title{
       margin: 20px;
       font-size: $fontLarge;
@@ -27,6 +31,18 @@
       .subTitle{
         font-weight: $weightBold;
         font-size: $fontRegular;
+      }
+      .idCheckBtn{
+        width: 70px;
+        height: 30px;
+        border-radius: 5px;
+        background:$main;
+        color: $white;
+        font-size: $fontMicro;
+      }
+      .idCheck{
+        background-color: rgb(192, 192, 192);
+        cursor: default;
       }
       .input, .select, .radio{
         padding: 2px;
