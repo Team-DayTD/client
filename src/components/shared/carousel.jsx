@@ -1,6 +1,5 @@
 import React from "react";
 import Slider from "react-slick"; 
-import dummy from "../../data/data.json";
 
 function Carousel (props,{ sliders }) {
   const settings = {
@@ -20,7 +19,7 @@ function Carousel (props,{ sliders }) {
 				<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
         <h3 className='title'><span className='color'>{props.title1}</span>{props.title2}{props.title3}</h3>
         <Slider {...settings}>
-          {dummy.codyImg.map((cody) =>(
+          {props.cody.map((cody) =>(
             <div className='codyBox'>
               <div className='imgBox'>
                 <img className='codyImg' src={`${process.env.PUBLIC_URL}/images/clothes/${cody.image}`} alt="" />

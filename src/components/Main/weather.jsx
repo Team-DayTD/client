@@ -25,7 +25,7 @@ const Weather = memo((props) => {
                     <ul className='temperature'>
                         <li className='TMPRT'>{props.GPS.temperture}º</li>
                         <li className='TMPRT_MinMax'>습기 : {props.GPS.humid} <p></p> 강수량 : {props.GPS.rain}</li>
-                        <li className='location'><FontAwesomeIcon className='locIcon' icon={faLocationDot} />{props.loc.gu} {props.loc.dong}</li>
+                        <li className='location'><FontAwesomeIcon className='locIcon' icon={faLocationDot} />{props.loc.gu}</li>
                     </ul>
                 </div>
             </section>
