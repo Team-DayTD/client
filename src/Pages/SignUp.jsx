@@ -97,7 +97,7 @@ const SignUp = () => {
       return
     }
     users.forEach((user)=>{
-      if(user.user_id===id)
+      if(user.use===id)
         check=false;
     })
     if(check)
@@ -127,12 +127,13 @@ const SignUp = () => {
     const url = 'http://127.0.0.1:8000/account/api/register/'
     const header = {"Content-type":"application/json"}
     const data= {
-      user_id: id,
+      user: id,
       password: password,
       gender: gender,
       birth: birthFormat,
       email: email,
     }
+    console.log(data);
     axios.post(url, data, header,{ withCredentials: true })
     .then(function (response) {
     console.log(response);
@@ -160,20 +161,21 @@ const SignUp = () => {
       <section id="signUp" className='signUpContainer'>
         <h1 className='title'>회원 가입</h1>
 
-        <form id="signUpId" className='signUpBox'>
+        <form>
+        <div id="signUpId" className='signUpBox'>
           <label className='subTitle' for='id'>아이디 <span className='star'>*</span></label><br/>
           <input type="text" name="id" id="id" maxlength="20" value={id}
             placeholder="ID" className='input' onChange={onChangeUserId}/>
           <button type='button' className={`idCheckBtn ${idCheck?'idCheck':'idCheckBtn'}`} onClick={()=>idCheck?null:idCheckHandler()}>중복 확인</button>
           <div className={`noti ${idError?'active':'none'}`}>최소 5자 이상, 영어와 숫자만 포함해주세요.</div>
-        </form>
-        <form id="signUpEmail" className='signUpBox'>
+        </div>
+        <div id="signUpEmail" className='signUpBox'>
           <label className='subTitle' for='email'>이메일 <span className='star'>*</span></label><br/>
           <input type="text" name=""email id="email" maxlength="50" value={email}
             placeholder="Email" className='input' onChange={onChangeEmail}/>
           <div className={`noti ${emailError?'active':'none'}`}>이메일 형식이 맞지 않습니다.</div>
-        </form>
-        <form id="pwBox" className='signUpBox'>
+        </div>
+        <div id="pwBox" className='signUpBox'>
           <label className='subTitle' for='password'>비밀번호 <span className='star'>*</span></label><br/>
           <input type="Password" name="password" id="password" maxlength="20" value={password}
             placeholder="비밀번호" className='input' onChange={onChangePassword}/>
@@ -181,6 +183,7 @@ const SignUp = () => {
           <input type="Password" name="password" id="passwordConfirm" maxlength="20" value={passwordConfirm}
             placeholder="비밀번호 재확인" className='input' onChange={onChangeConfirmPassword}/>
           <div className={`noti ${passwordConfirmError?'active':'none'}`}>비밀번호가 일치하지 않습니다.</div>
+        </div>
         </form>
         <div id="signUpGender" className='signUpBox'>
           <p className='subTitle' >성별 <span className='star'>*</span></p>
@@ -189,8 +192,8 @@ const SignUp = () => {
             className='radio' checked={gender === 'M'}
             onChange={onChangeGender}/>
           <label for='female'>여성</label>
-          <input type="radio" name="gender" id="F" value="F" 
-            className='radio' checked={gender === 'F'}
+          <input type="radio" name="gender" id="W" value="W" 
+            className='radio' checked={gender === 'W'}
             onChange={onChangeGender}/>
         </div>
         <div id="signUpBirthday" className='signUpBox'>

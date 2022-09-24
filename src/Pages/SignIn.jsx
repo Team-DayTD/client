@@ -23,6 +23,7 @@ const SignIn = memo((props) => {
       const url = 'http://127.0.0.1:8000/account/api/user/'
       const response = await axios.get(url,{withCredentials:true});
       setUsers(response.data);
+      console.log(response.data);
     } catch(e){
       console.log(e);
     }
@@ -40,7 +41,7 @@ const SignIn = memo((props) => {
   }
   const loginClickHandler = () => {
     users.forEach((user)=>{
-      if(user.user_id===id && user.password ===password){
+      if(user.user===id && user.password ===password){
         sessionStorage.setItem("loginId", id);
         alert(`${JSON.stringify(sessionStorage.loginId)}님 로그인 성공`)
         navigate('/');

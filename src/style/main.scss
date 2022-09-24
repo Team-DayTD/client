@@ -35,6 +35,8 @@
     align-items: center;
     text-align: center;
     background-color: $white;
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
 
 // .container{

@@ -17,9 +17,6 @@ const CodyMyFilter = memo((props)=>{
   const [isOpen, setToggle] = useState(false); 
   const id = JSON.stringify(sessionStorage.loginId).replace(/\"/gi, "");
   const styleList = ["전체", "캐주얼","러블리","심플베이직","섹시글램","유니크","빈티지","기타"]
-  const styleDic = {"전체":"all",
-    "캐주얼":"casual","러블리":"lovely","심플베이직":"simple&basic",
-    "섹시글램":"sexy","유니크":"unique","빈티지":"vintage","기타":"ect"}
 
   const toggleBtn = () => {
     setToggle(isOpen => !isOpen); // on,off 개념 boolean
@@ -34,9 +31,18 @@ const CodyMyFilter = memo((props)=>{
         si:loc.si,
         dong: loc.dong,
         gu: loc.gu,
+        num_list: props.cate
       }
+      console.log(data);
       const response = await axios.post(url, data, header,{ withCredentials: true })
       setLocSave(response);
+      if(response.status == 201){
+        alert('저장 성공!')
+        props.fetchCody()
+      } else {
+        let message = locSave.data.message;
+        alert(message);
+      }
     } catch(e){
       setError(e);
       console.log(e);
@@ -49,8 +55,10 @@ const CodyMyFilter = memo((props)=>{
       const header = {"Content-type":"application/json"}
       const data= {
         user_id: id,
-        user_style: styleDic[style]
+        user_style: style,
+        num_list: props.cate
       }
+      console.log(data);
       const response = await axios.post(url, data, header,{ withCredentials: true })
       setStyleSave(response);
     } catch(e){
@@ -59,18 +67,9 @@ const CodyMyFilter = memo((props)=>{
     }
   }
 
-  const onSave = (e) => {
+  const onSave = () => {
     fetchLocSave();
-    fetchStyleSave();
-    console.log(locSave, styleSave)
-    if(locSave.status == 201){
-      alert('저장 성공!')
-      props.fetchCody()
-      } else {
-      let message = locSave.data.message;
-      alert(message);
-      }
-    
+    fetchStyleSave()
   }
   useEffect(()=>{
     setLoc({si:props.locOpt.si, 
@@ -95,7 +94,7 @@ const CodyMyFilter = memo((props)=>{
         </ul>
         <div className='loc'>
         <select id='location' className='select'
-          value={loc.si} onChange={e =>setLoc({...loc, si:e.target.value})}>
+          value={loc.si} onChange={e =>setLoc({si:e.target.value, gu:"전체",dong:"전체"})}>
           {Object.keys(location).map(si => (
             <option value={si} key={si}>
               {si}
@@ -103,7 +102,7 @@ const CodyMyFilter = memo((props)=>{
           ))}
         </select>
         <select id='location' className='select'
-          value={loc.gu} onChange={e =>setLoc({...loc, gu:e.target.value})}>
+          value={loc.gu} onChange={e =>setLoc({...loc, gu:e.target.value, dong:"전체"})}>
           {Object.keys(location[loc.si]).map(gu => (
             <option value={gu} key={gu}>
               {gu}

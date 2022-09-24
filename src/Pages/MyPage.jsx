@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
+import Loader from '../components/shared/Loader';
 
 const MyPage = () => {
   const [email, setEmail] = useState("example@gmail.com");
@@ -10,7 +13,27 @@ const MyPage = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordConfirmError, setConfirmPasswordError] = useState(false);
   const [telError, setTelError] = useState(false);
+  const [myUser, setMyUser] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const userId = JSON.stringify(sessionStorage.loginId).replace(/\"/gi, "");
   
+    // 내정보 불러오기
+    const fetchCody = async(style)=>{
+        try{
+          setLoading(true);
+          const url = 'http://127.0.0.1:8000/account/api/myuser/'
+          const response = await axios.get(url,{params:{user: userId}},{withCredentials:true});
+          setMyUser(response.data);
+          console.log(response.data)
+        } catch(e){
+          setError(e);
+          console.log(e);
+        }
+        setLoading(false);
+      }
+  
+
   const onChangeEmail = (e) => {
       const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
       if (!e.target.value || emailRegex.test(e.target.value)) setEmailError(false);
@@ -56,23 +79,24 @@ const MyPage = () => {
       else{}
       // call API
   }
+  useEffect(()=>{
+    fetchCody();
+  },[])
   return (
     <div className='myPage'>
     <h2 className='title'>❤️마이페이지❤️</h2>
-    <section className='optContainer'>
+    {loading? <Loader type="spin" spinColor="#175A97" fontColor="#175A97"/>
+    :<section className='optContainer'>
             <h2 className='title2'>기본 설정</h2>
             <div className='optBox'>
-            
-            <h3 className='subTitle'>이름</h3>
-            <div className={'output'}>example</div>
+
+            <h3 className={'subTitle'}>ID</h3>
+            <div className={'output'}>{myUser.user}</div>
 
             <h3 className='subTitle'>이메일</h3>
             {emailError && <div class='invalidInput'>이메일 형식이 맞지 않습니다.</div>}
-            <input type="text" name=""email id="email" maxlength="50" value={email}
+            <input type="text" name=""email id="email" maxlength="50" value={myUser.email}
             placeholder="Email" className='input' onChange={onChangeEmail}/>
-
-            <h3 className={'subTitle'}>ID</h3>
-            <div className={'output'}>example</div>
             
             <h3 className={'subTitle'}>Password 확인/변경</h3>
             {passwordError && <div class='invalidInput'>최소 8자 이상, 영어와 숫자, 특수문자를 포함해주세요. </div>}
@@ -83,17 +107,17 @@ const MyPage = () => {
             placeholder="비밀번호 재확인" className='input' onChange={onChangeConfirmPassword}/>
             
             <h3 className={'subTitle'}>성별</h3>
-            <div className={'output'}>여성</div>
+            <div className={'output'}>{myUser.gender==="M"?"남성":"여성"}</div>
 
             <h3 className={'subTitle'}>생년월일</h3>
-            <div className={'output'}>2000-01-05</div>
+            <div className={'output'}>{myUser.birth}</div>
 
-            <div className='btnBox'>
+            {/* <div className='btnBox'>
             <button className={`saveBtn ${onSave? 'btnAction' : 'btnInaction'}`}
                 onClick={onSave}>저장하기</button>                 
+            </div> */}
             </div>
-            </div>
-        </section>
+        </section>}
   </div>
   );
 };

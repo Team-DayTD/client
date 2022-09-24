@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
-function Loader({type, spinColor, fontColor}) {
+function Loader({type, spinColor, fontColor, minHeight="0px", message="loading"}) {
   return (
-    <div class="contentWrap">
+    <div class="contentWrap" style={{
+      height: "100%",   
+      minHeight:`${minHeight}`,
+      display:"flex",
+      alignItems:"center",
+      justifyContent:"center"}}> 
       <div style={{
-        position: "fixed",
-        left: "50%",
-        transform: "translate(-50%, 0)",
+        width:"100%",
+        height:"100%",
+        margin:"auto",
         display: "flex",
         flexDirection:"column",
         justifyContent:"center",
@@ -15,9 +20,8 @@ function Loader({type, spinColor, fontColor}) {
         <ReactLoading
           type={type}
           color={spinColor}
-          height={'100%'}
-          width={'100%'} />
-        <p style={{color:`${fontColor}`}}>loading</p>
+          width={'10%'} />
+        <p style={{color:`${fontColor}`}}>{message}</p>
       </div>
     </div>
   );

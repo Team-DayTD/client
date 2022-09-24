@@ -73,11 +73,12 @@
       font-size: $fontMicro;  
       color: $white;
       text-align: start;
+      display: none;
     }
     .active{
+      display:block;
       color: $red;
     }
   }
 }
-
 
