@@ -16,7 +16,7 @@ const CodyMyFilter = memo((props)=>{
   const [error, setError] = useState(false);
   const [isOpen, setToggle] = useState(false); 
   const id = JSON.stringify(sessionStorage.loginId).replace(/\"/gi, "");
-  const styleList = ["전체", "캐주얼","러블리","심플베이직","섹시글램","유니크","빈티지","기타"]
+  const styleList = ["캐주얼","러블리","심플베이직","섹시글램","유니크", "유니섹스","빈티지","기타"]
 
   const toggleBtn = () => {
     setToggle(isOpen => !isOpen); // on,off 개념 boolean

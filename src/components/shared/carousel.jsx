@@ -13,6 +13,7 @@ function Carousel (props,{ sliders }) {
     autoplay: true, 
     autoplaySpeed: 4000, 
   }
+  console.log(props);
   return(
       <div className='carouselContainer'>
 				<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
@@ -22,7 +23,7 @@ function Carousel (props,{ sliders }) {
           {props.cody.map((cody) =>(
             <div className='codyBox'>
               <div className='imgBox'>
-                <img className='codyImg' src={`${process.env.PUBLIC_URL}/images/clothes/${cody.image}`} alt="" />
+                <img className='codyImg' src={`${process.env.PUBLIC_URL}media/clothes/${cody.style}/${cody.id}.jpg`} alt="" />
               </div>
             </div>
           ))}
