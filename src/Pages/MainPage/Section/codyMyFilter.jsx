@@ -1,9 +1,9 @@
-import React, { memo, useState } from 'react';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faChevronDown} from '@fortawesome/free-solid-svg-icons';
-import location from "../../data/location.json";
 import axios from 'axios';
-import { useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
+import location from "../../../data/location.json";
+
 const CodyMyFilter = memo((props)=>{
   const [style, setStyle] = useState("전체");
   const [loc, setLoc] = useState({
@@ -24,7 +24,7 @@ const CodyMyFilter = memo((props)=>{
 
   const fetchLocSave = async()=>{
     try{
-      const url = 'http://127.0.0.1:8000/clothes/api/my_location/post/'
+      const url = `${process.env.REACT_APP_URL}/clothes/api/my_location/post/`
       const header = {"Content-type":"application/json"}
       const data= {
         user_id: id,
@@ -33,7 +33,6 @@ const CodyMyFilter = memo((props)=>{
         gu: loc.gu,
         num_list: props.cate
       }
-      console.log(data);
       const response = await axios.post(url, data, header,{ withCredentials: true })
       setLocSave(response);
       if(response.status == 201){
@@ -51,14 +50,13 @@ const CodyMyFilter = memo((props)=>{
 
   const fetchStyleSave = async()=>{
     try{
-      const url = 'http://127.0.0.1:8000/clothes/api/my_style/post/'
+      const url = `${process.env.REACT_APP_URL}/clothes/api/my_style/post/`
       const header = {"Content-type":"application/json"}
       const data= {
         user_id: id,
         user_style: style,
         num_list: props.cate
       }
-      console.log(data);
       const response = await axios.post(url, data, header,{ withCredentials: true })
       setStyleSave(response);
     } catch(e){

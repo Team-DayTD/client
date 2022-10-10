@@ -1,10 +1,9 @@
 import React, {memo} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot  } from '@fortawesome/free-solid-svg-icons';
-import Loader from '../shared/Loader';
+import Loader from '../../../components/Loader';
 
 const Weather = memo((props) => {
-    console.log(props.GPS)
     let today = new Date();
     const dayArray = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"];
     const weather = {

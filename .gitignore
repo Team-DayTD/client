@@ -17,22 +17,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-
-# font
-# yarn add @fortawesome/fontawesome-svg-core
-# yarn add @fortawesome/free-solid-svg-icons
-# yarn add @fortawesome/react-fontawesome
-# npm install --save @fortawesome/free-brands-svg-icons
-# npm install --save @fortawesome/free-regular-svg-icons
-
-# - slick
-# yarn add react-slick --save
-# yarn add slick-carousel --save
-
-# - redux
-# npm install redux react-redux redux-promise redux-thunk --save

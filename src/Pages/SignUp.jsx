@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Popup from '../components/shared/popup';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Popup from '../components/popup';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -109,7 +109,7 @@ const SignUp = () => {
 
   const fetchUser = async()=>{
     try{
-      const url = 'http://127.0.0.1:8000/account/api/user/'
+      const url = `${process.env.REACT_APP_URL}/account/api/user/`
       const response = await axios.get(url,{withCredentials:true});
       setUsers(response.data);
     } catch(e){
@@ -124,7 +124,7 @@ const SignUp = () => {
       alert('중복 확인 및 빈칸을 채워주세요');
     }
     else{
-    const url = 'http://127.0.0.1:8000/account/api/register/'
+    const url = `${process.env.REACT_APP_URL}/account/api/register/`
     const header = {"Content-type":"application/json"}
     const data= {
       user: id,

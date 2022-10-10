@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
 import axios from 'axios';
-import { useEffect } from 'react';
-import Loader from '../components/shared/Loader';
+import React, { useEffect, useState } from 'react';
+import Loader from '../components/Loader';
 
 const MyPage = () => {
   const [email, setEmail] = useState("example@gmail.com");
@@ -22,10 +21,9 @@ const MyPage = () => {
     const fetchCody = async(style)=>{
         try{
           setLoading(true);
-          const url = 'http://127.0.0.1:8000/account/api/myuser/'
+          const url = `${process.env.REACT_APP_URL}/account/api/myuser/`
           const response = await axios.get(url,{params:{user: userId}},{withCredentials:true});
           setMyUser(response.data);
-          console.log(response.data)
         } catch(e){
           setError(e);
           console.log(e);

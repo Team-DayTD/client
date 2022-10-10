@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Navbar from './components/layout/navbar';
-import Main from './Pages/Main';
-import Like from './Pages/Like';
+import Navbar from './components/navbar';
+import Main from './Pages/MainPage/Main';
+import Like from './Pages/LikePage/Like';
 import MyPage from './Pages/MyPage';
 import SignUp from './Pages/SignUp';
 import "./style/main.scss";
-import Footer from './components/layout/footer';
+import Footer from './components/footer';
 
 function App() {
   return (

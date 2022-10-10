@@ -2,7 +2,7 @@ import React from 'react';
 import ReactLoading from 'react-loading';
 function Loader({type, spinColor, fontColor, minHeight="0px", message="loading"}) {
   return (
-    <div class="contentWrap" style={{
+    <div className="contentWrap" style={{
       height: "100%",   
       minHeight:`${minHeight}`,
       display:"flex",

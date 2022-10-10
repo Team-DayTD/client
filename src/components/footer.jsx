@@ -13,7 +13,6 @@ const Footer = () => {
       <h5>
       Copyright ⓒ2022 <b className='blue'>DayTD</b> - All Rights Reserved
       </h5>
-      icon by Icons8
       </div>
     </footer>
   );

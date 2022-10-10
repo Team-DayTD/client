@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Weather from '../components/Main/weather';
-import RecoCody from '../components/Main/RecoCody';
+import Weather from './Section/weather';
+import RecoCody from './Section/RecoCody';
 import axios from 'axios';
 
 const MainPage = ()=>{
@@ -18,7 +18,7 @@ const MainPage = ()=>{
   const fetchGPS = async()=>{
     try{
       setLoading(true);
-      const url = 'http://localhost:8000/our_weather/'
+      const url = `${process.env.REACT_APP_URL}/our_weather/`
       const response = await axios.get(url, {params:{ lat:lat ,lon:lon}},
       {withCredentials:true});
       setGPS(response.data);
@@ -27,7 +27,6 @@ const MainPage = ()=>{
       console.log(e);
     }
     mapApi();
-    // getAddr(lat, lon);
     setLoading(false);
   }
 
@@ -50,14 +49,13 @@ const MainPage = ()=>{
   }
 
 const mapApi = async () => {
-  console.log(lat, lon);
   try {
     let response = await axios
       .get(
         `https://dapi.kakao.com/v2/local/geo/coord2address.json?input_coord=WGS84&x=${lon}&y=${lat}`,
         {
           headers: {
-            Authorization: 'KakaoAK 93045994f59d7d87d000bb0656c55117',  
+            Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_KEY}`,  
           },
         },
       )
@@ -68,7 +66,7 @@ const mapApi = async () => {
           dong: location.address.region_3depth_name});
       });
   } catch (error) {
-    console.log(error.message);
+    // console.log(error.message);
   }
 };
 
@@ -77,7 +75,6 @@ const mapApi = async () => {
     setLoading(true);
     getLocation();
     fetchGPS();
-    console.log(lat, lon, error, loading);
   },[lat])
   
   return (

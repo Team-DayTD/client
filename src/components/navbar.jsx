@@ -1,8 +1,8 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, memo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse,faHeart,faUser, faArrowRightFromBracket  } from '@fortawesome/free-solid-svg-icons';
-import SignIn from '../../Pages/SignIn';
+import SignIn from '../Pages/SignIn';
 
 const Navbar = memo(() => {
   const navigate = useNavigate();

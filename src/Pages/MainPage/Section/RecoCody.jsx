@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import CateBtn from '../../../components/cateBtn';
 import CodyBest from './codyBest';
-import CateBtn from '../shared/cateBtn';
 import CodyMy from './codyMy';
 
 const RecoCody = () => {
@@ -21,9 +21,9 @@ const RecoCody = () => {
     <div className='recoContainer'>
       <div className='btnContainer'>
         <CateBtn content='Best!' nav='best' btnSetting={btnSetting}/>
-        <CateBtn content='내 코디1' nav='cody1' btnSetting={btnSetting}/>
-        <CateBtn content='내 코디2' nav='cody2' btnSetting={btnSetting}/>
-        <CateBtn content='내 코디3' nav='cody3' btnSetting={btnSetting}/>
+        <CateBtn content='출근룩' nav='cody1' btnSetting={btnSetting}/>
+        <CateBtn content='일상룩' nav='cody2' btnSetting={btnSetting}/>
+        <CateBtn content='데이트룩' nav='cody3' btnSetting={btnSetting}/>
       </div>
       {codyContent && <div className='content_container'>{codyComponent[codyContent]}</div>}
     </div>

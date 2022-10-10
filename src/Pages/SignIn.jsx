@@ -1,6 +1,6 @@
-import React, { memo, useEffect, useState } from "react";
-import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import React, { memo, useEffect, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignIn = memo((props) => {
   const navigate = useNavigate();
@@ -20,10 +20,9 @@ const SignIn = memo((props) => {
 
   const fetchUser = async()=>{
     try{
-      const url = 'http://127.0.0.1:8000/account/api/user/'
+      const url = `${process.env.REACT_APP_URL}/account/api/user/`
       const response = await axios.get(url,{withCredentials:true});
       setUsers(response.data);
-      console.log(response.data);
     } catch(e){
       console.log(e);
     }
